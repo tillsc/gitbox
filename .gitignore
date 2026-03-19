@@ -22,3 +22,6 @@ openssl/lib/pkgconfig
 openssl/ssl
 openssl/bin
 
+# build output
+Gitbox.app
+

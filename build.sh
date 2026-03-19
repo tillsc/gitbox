@@ -1,6 +1,30 @@
 #!/bin/bash
 set -e
 
+echo "==> Checking prerequisites..."
+
+if ! command -v xcodebuild &>/dev/null; then
+  echo "ERROR: xcodebuild not found. Install Xcode from the App Store."
+  exit 1
+fi
+
+if ! command -v cmake &>/dev/null; then
+  echo "ERROR: cmake not found. Install it via: brew install cmake"
+  exit 1
+fi
+
+# Check if Xcode first launch setup has been completed
+if ! xcodebuild -version &>/dev/null; then
+  echo "==> Running xcodebuild -runFirstLaunch (requires sudo)..."
+  sudo xcodebuild -runFirstLaunch
+fi
+
+# Check if Xcode license has been accepted
+if xcodebuild -version 2>&1 | grep -q "license"; then
+  echo "ERROR: Xcode license not accepted. Run: sudo xcodebuild -license accept"
+  exit 1
+fi
+
 echo "==> Initializing submodules..."
 git submodule update --init --recursive
 
@@ -30,10 +54,16 @@ BUILD_DIR=$(xcodebuild \
   CODE_SIGN_IDENTITY="-" \
   CODE_SIGNING_REQUIRED=NO \
   CODE_SIGNING_ALLOWED=NO \
-  -showBuildSettings 2>/dev/null | grep "BUILT_PRODUCTS_DIR" | awk '{print $3}')
+  -showBuildSettings 2>/dev/null | grep -E "^\s+BUILT_PRODUCTS_DIR\s*=" | awk '{print $3}')
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+echo "==> Copying Gitbox.app to project directory..."
+rm -rf "$SCRIPT_DIR/Gitbox.app"
+ditto "$BUILD_DIR/Gitbox.app" "$SCRIPT_DIR/Gitbox.app"
 
 echo ""
 echo "==> Done! App is at:"
-echo "    $BUILD_DIR/Gitbox.app"
+echo "    $SCRIPT_DIR/Gitbox.app"
 echo ""
-echo "    To open: open \"$BUILD_DIR/Gitbox.app\""
+echo "    To open: open \"$SCRIPT_DIR/Gitbox.app\""
