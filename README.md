@@ -8,3 +8,12 @@ Please feel free to explore my 15-year old Objective-C code. Note that this proj
 
 Pull requests are welcome.
 
+## Building
+
+**Requirements:** Xcode (from the App Store) and CMake (`brew install cmake`).
+
+```bash
+./build.sh
+```
+
+That's it. The script initializes submodules, compiles libgit2, and builds the app. The result ends up in Xcode's DerivedData folder — the script prints the exact path when done.
