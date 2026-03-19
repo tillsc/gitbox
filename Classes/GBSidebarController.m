@@ -3,8 +3,6 @@
 #import "GBRepository.h"
 #import "GBSidebarItem.h"
 #import "GBSidebarCell.h"
-#import "OALicenseNumberCheck.h"
-
 #import "OAFastJumpController.h"
 #import "NSFileManager+OAFileManagerHelpers.h"
 #import "NSTableView+OATableViewHelpers.h"
@@ -22,7 +20,6 @@
 - (void) updateContents;
 - (void) updateSelection;
 - (void) updateExpandedState;
-- (void) updateBuyButton;
 - (NSMenu*) defaultMenu;
 @end
 
@@ -32,7 +29,6 @@
 @synthesize rootController;
 @synthesize outlineView;
 @synthesize ignoreSelectionChange;
-@synthesize buyButton;
 @synthesize jumpController;
 
 - (void) dealloc
@@ -50,9 +46,7 @@
 	[self.outlineView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:NO];
 	[self.outlineView setMenu:[self defaultMenu]];
 	[self.outlineView setAutoresizesOutlineColumn:NO];
-	[self updateBuyButton];
 	[self updateContents];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(licenseDidUpdate:) name:OALicenseDidUpdateNotification object:nil];
 }
 
 - (void) setRootController:(GBRootController *)aRootController
@@ -64,12 +58,6 @@
 	[rootController addObserverForAllSelectors:self];
 	
 	[self updateContents];
-}
-
-
-- (void) licenseDidUpdate:(NSNotification*)notif
-{
-	[self updateBuyButton];
 }
 
 
@@ -617,7 +605,6 @@
 
 - (void) updateContents
 {
-	[self updateBuyButton];
 	self.ignoreSelectionChange++;
 	[self.outlineView reloadData];
 	[self updateExpandedState];
@@ -666,18 +653,6 @@
 		}
 	}];
 }
-
-- (void) updateBuyButton
-{
-#if GITBOX_APP_STORE
-#else
-	
-	NSString* license = [[NSUserDefaults standardUserDefaults] objectForKey:@"license"];
-	[self.buyButton setHidden:OAValidateLicenseNumber(license)];
-	
-#endif
-}
-
 
 
 
