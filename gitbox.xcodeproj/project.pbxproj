@@ -2589,7 +2589,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Oleg Andreev";
+				CODE_SIGN_IDENTITY = "-";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2605,7 +2605,6 @@
 					"\"$(SRCROOT)/openssl/lib\"",
 				);
 				PRODUCT_NAME = Gitbox;
-				PROVISIONING_PROFILE = "B3B8F00F-28E7-47A0-B749-8073CDC9A70E";
 			};
 			name = Release;
 		};
@@ -2666,7 +2665,7 @@
 			buildSettings = {
 				APP_VERSION = "2013-10-28";
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Oleg Andreev (9F23AVDPMZ)";
+				CODE_SIGN_IDENTITY = "-";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = "";
@@ -2681,7 +2680,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DDEBUG=1";
 				OTHER_LDFLAGS = "-lcrypto";
-				PROVISIONING_PROFILE = "903A155A-8E32-4C2E-A88C-EBECA6C54744";
 				SDKROOT = macosx;
 				SPARKLE_FEED_URL = "http://gitboxapp.com/updates-beta.xml";
 				VALID_ARCHS = x86_64;
@@ -2693,7 +2691,7 @@
 			buildSettings = {
 				APP_VERSION = 1.6.4;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Oleg Andreev (9F23AVDPMZ)";
+				CODE_SIGN_IDENTITY = "-";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -2707,7 +2705,6 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-lcrypto";
-				PROVISIONING_PROFILE = "7B4612BC-080E-4DF6-AF28-41D93A00F71B";
 				SDKROOT = macosx;
 				SPARKLE_FEED_URL = "http://gitboxapp.com/updates.xml";
 				VALID_ARCHS = x86_64;
